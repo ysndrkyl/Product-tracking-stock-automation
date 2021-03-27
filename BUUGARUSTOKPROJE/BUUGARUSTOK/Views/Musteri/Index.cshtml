@@ -1,0 +1,53 @@
+﻿@using BUUGARUSTOK.Models.Entity;
+@model List<TBLMUSTERILER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<table id="tbl3" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>MÜŞTERİ ID</th>
+            <th>MÜŞTERİ ADI</th>
+            <th>MÜŞTERİ SOYAD</th>
+            <th>MÜŞTERİ TEL</th>
+            <th>MÜŞTERİ INSTAGRAM</th>
+            <th>MÜŞTERİ ADRES</th>
+            <th>MÜŞTERİ EMAIL</th>
+            <th>GÜNCELLE</th>
+            <th>SİL</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mus in Model)
+        {
+            <tr>
+                <td>@mus.MUSTERIID</td>
+                <td>@mus.MUSTERIAD</td>
+                <td>@mus.MUSTERISOYAD</td>
+                <td>@mus.MUSTERITEL</td>
+                <td>@mus.MUSTERIINSTAGRAM</td>
+                <td>@mus.MUSTERIADRES</td>
+                <td>@mus.MUSTERIEMAIL</td>
+                <td><a href="/MUSTERI/MusteriGuncelle/@mus.MUSTERIID" class="btn btn-success">GÜNCELLE</a></td>
+
+                <td>@Html.ActionLink("SİL", "SIL", new { id = mus.MUSTERIID }, new { @class = "btn btn-danger", onclick = "return confirm('Gerçekten silmek istiyormusunuz?')" })</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<a href="/Musteri/YeniMusteri/" class="btn btn-primary">YENİ MÜŞTERİ EKLE</a>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<script>
+    $('#tbl3').DataTable();
+</script>
+
+

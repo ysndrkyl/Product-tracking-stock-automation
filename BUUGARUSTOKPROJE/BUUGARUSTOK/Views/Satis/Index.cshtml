@@ -1,0 +1,43 @@
+﻿@using BUUGARUSTOK.Models.Entity
+@model List<TBLSATISLAR>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<table id="tbl2" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>MÜŞTERİ ADI</th>
+            <th>ÜRÜN ADI</th>
+            <th>ADET</th>
+            <th>FİYAT</th>
+            <th>TARİH</th>
+            <th>TOPLAM TUTAR</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.TBLMUSTERILER.MUSTERIAD @x.TBLMUSTERILER.MUSTERISOYAD</td>
+                <td>@x.TBLURUNLER.KITAPAD</td>
+                <td>@x.ADET</td>
+                <td>@x.FIYAT</td>
+                <td>@x.TARIH</td>
+                <td>@x.TOPLAMTUTAR</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<script>
+    $('#tbl2').DataTable();
+</script>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce7bc404545642ed9d42a6bdd9019d92" Name="Diagram1">
+        <EntityTypeShape EntityType="FinishProjectVtbModel.Admin" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinishProjectVtbModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinishProjectVtbModel.TBLKATEGORILER" Width="1.5" PointX="1.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinishProjectVtbModel.TBLMUSTERILER" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinishProjectVtbModel.TBLSATISLAR" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinishProjectVtbModel.TBLURUNLER" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="FinishProjectVtbModel.FK_TBLURUNLER_TBLKATEGORILER1" ManuallyRouted="false" />
+        <AssociationConnector Association="FinishProjectVtbModel.FK_TBLSATISLAR_TBLMUSTERILER" ManuallyRouted="false" />
+        <AssociationConnector Association="FinishProjectVtbModel.FK_TBLSATISLAR_TBLMUSTERILER1" ManuallyRouted="false" />
+        <AssociationConnector Association="FinishProjectVtbModel.FK_TBLSATISLAR_TBLURUNLER1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

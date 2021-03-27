@@ -1,0 +1,56 @@
+﻿@model BUUGARUSTOK.Models.Entity.TBLURUNLER
+@{
+    ViewBag.Title = "UrunGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("Guncelle", "Urun", FormMethod.Post))
+{ 
+<div class="form-group">
+    @Html.LabelFor(m => m.KITAPID)
+    @Html.TextAreaFor(m => m.KITAPID, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.KITAPAD)
+    @Html.TextAreaFor(m => m.KITAPAD, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.KITAPKATEGORI)
+    @Html.DropDownListFor(m => m.TBLKATEGORILER.KATEGORIID, (List<SelectListItem>)ViewBag.dgr, new { @class = "form-control" })
+    @*@Html.TextAreaFor(m => m.KITAPKATEGORI, new { @class = "from-control" })*@
+    <br />
+    @Html.LabelFor(m => m.YAZAR)
+    @Html.TextAreaFor(m => m.YAZAR, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.KITAPTUR)
+    @Html.TextAreaFor(m => m.KITAPTUR, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.ALISFİYATGRV)
+    @Html.TextAreaFor(m => m.ALISFİYATGRV, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.KURGRV)
+    @Html.TextAreaFor(m => m.KURGRV, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.SATISFİYATTL)
+    @Html.TextAreaFor(m => m.SATISFİYATTL, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.DURUMU)
+    @Html.TextAreaFor(m => m.DURUMU, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.STOK)
+    @Html.TextAreaFor(m => m.STOK, new { @class = "form-control" })
+    <br />
+    @Html.LabelFor(m => m.ALISTARIH)
+    @Html.TextAreaFor(m => m.ALISTARIH, new { @class = "form-control" })
+
+    <br />
+    @Html.LabelFor(m => m.KALANKARTL)
+    @Html.TextAreaFor(m => m.KALANKARTL, new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-warning">ÜRÜN GÜNCELLE</button>
+
+</div>
+}
+    
+       
+   
+

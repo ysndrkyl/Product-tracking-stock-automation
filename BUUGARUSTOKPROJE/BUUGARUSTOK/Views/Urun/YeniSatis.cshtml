@@ -1,0 +1,45 @@
+﻿@model BUUGARUSTOK.Models.Entity.TBLSATISLAR
+@{
+    ViewBag.Title = "YeniSatis";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("YeniSatis", "Urun", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <form class=" form-group" method="post">
+        <label><b>Ürün ID</b></label>
+        <input type="text" name="URUN" value="@ViewBag.dgr1" class="form-control" readonly />
+        <br />
+        <label><b>Cari </b></label>
+        @Html.TextBoxFor(m => m.MUSTERI, new { @class = "form-control" })
+        <br />
+        <label><b>Adet</b></label>
+        <input type="number" class="form-control" max="10" min="0" placeholder="Adet Girin" id="txt1" onchange="sum()" name="ADET" />
+        <br />
+        <label><b>Satış Fiyatı</b></label>
+        <input type="text" name="Fiyat" value="@ViewBag.dgr2" class="form-control" id="txt2" onkeyup="sum()" />
+        <br />
+        <label><b>Toplam Tutar</b></label>
+        <input type="text" name="TOPLAMTUTAR" value="0" class="form-control" id="txt3" readonly />
+        <br />
+        <label><b>SATIŞ TARİHİ </b></label>
+        @Html.TextBoxFor(m => m.TARIH, new { @class = "form-control" })
+
+
+        <button class="btn btn-primary">Satış Yap</button>
+
+    </form>
+}
+<br />
+
+<script>
+    function sum() {
+        var sayi1 = document.getElementById('txt1').value;
+        var sayi2 = document.getElementById('txt2').value;
+        var sonuc = parseInt(sayi1) * parseInt(sayi2);
+        if (!isNaN(sonuc)) {
+            document.getElementById('txt3').value = sonuc;
+        }
+    }
+</script>
+

@@ -1,0 +1,48 @@
+﻿@model BUUGARUSTOK.Models.Entity.TBLMUSTERILER
+@{
+    ViewBag.Title = "MusteriGuncelle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("Guncelle", "Musteri", FormMethod.Post))
+{
+
+    <div class="from-group">
+        @Html.LabelFor(m => m.MUSTERIID)
+        @Html.TextAreaFor(m => m.MUSTERIID, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        @Html.LabelFor(m => m.MUSTERIAD)
+        @Html.TextAreaFor(m => m.MUSTERIAD, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        @Html.LabelFor(m => m.MUSTERISOYAD)
+        @Html.TextAreaFor(m => m.MUSTERISOYAD, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        @Html.LabelFor(m => m.MUSTERITEL)
+        @Html.TextAreaFor(m => m.MUSTERITEL, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        @Html.LabelFor(m => m.MUSTERIINSTAGRAM)
+        @Html.TextAreaFor(m => m.MUSTERIINSTAGRAM, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        @Html.LabelFor(m => m.MUSTERIADRES)
+        @Html.TextAreaFor(m => m.MUSTERIADRES, new { @class = "form-control" })
+    </div>
+    <br />
+    <div>
+        @Html.LabelFor(m => m.MUSTERIEMAIL)
+        @Html.TextAreaFor(m => m.MUSTERIEMAIL, new { @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-warning">MÜŞTERİ GÜNCELLE</button>
+    </div>
+ }
+

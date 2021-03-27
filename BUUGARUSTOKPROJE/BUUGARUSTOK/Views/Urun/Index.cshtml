@@ -1,0 +1,60 @@
+﻿@using BUUGARUSTOK.Models.Entity;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<TBLURUNLER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>KİTAP ADI</th>
+            <th>YAZAR ADI</th>
+            <th>ÜRÜN TÜR</th>
+            <th>KATEGORİ</th>
+            <th>ALIŞ GRV</th>
+            <th>KUR GRV</th>
+            <th>SATIŞ TL</th>
+            <th>DURUMU</th>
+            <th>STOK</th>
+            <th>ALIŞ TARİH</th>
+            <th>KALAN CİRO</th>
+            <th>GÜNCELLE</th>
+            <th>SATIŞ YAP</th>
+            <th>SİL</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var urn in Model)
+        {
+            <tr>
+                <td>@urn.KITAPAD</td>
+                <td>@urn.YAZAR</td>
+                <td>@urn.KITAPTUR</td>
+                <td>@urn.TBLKATEGORILER.KATEGORIAD</td>
+                <td>@urn.ALISFİYATGRV</td>
+                <td>@urn.KURGRV</td>
+                <td>@urn.SATISFİYATTL</td>
+                <td>@urn.DURUMU</td>
+                <td>@urn.STOK</td>
+                <td>@urn.ALISTARIH</td>
+                <td>@urn.KALANKARTL</td>
+                <td><a href="/URUN/UrunGetir/@urn.KITAPID" class="btn btn-success">GÜNCELLE</a></td>
+                <td><a href="/URUN/YeniSatis/@urn.KITAPID" class="btn btn-warning">SATIŞ YAP</a></td>
+                <td>@Html.ActionLink("SİL", "SIL", new { id = urn.KITAPID }, new { @class = "btn btn-danger", onclick = "return confirm('Gerçekten silmek istiyormusunuz?')" })</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/URUN/UrunEkle/" class="btn btn-primary">YENİ ÜRÜN EKLE</a>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
+
+<script>
+    $('#tbl1').DataTable();
+</script>

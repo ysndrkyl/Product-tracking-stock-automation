@@ -1,0 +1,69 @@
+﻿@model BUUGARUSTOK.Models.Entity.TBLURUNLER
+@{
+    ViewBag.Title = "UrunEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<form method="post" class="form-group">
+    <div>
+        <label>KİTAP ADI</label>
+        <input type="text" class="form-control" name="KITAPAD" required="" />
+    </div>
+    <div>
+        <label>KATEGORİ SEÇİNİZ</label>
+        @Html.DropDownListFor(m => m.TBLKATEGORILER.KATEGORIID, (List<SelectListItem>)ViewBag.dgr, new { @class="form-control"})
+    </div>
+
+    <div>
+        <label>YAZAR ADI</label>
+        <input type="text" class="form-control" name="YAZAR" required="" />
+    </div>
+
+    <div>
+        <label>ÜRÜN TÜRÜ</label>
+        <input type="text" class="form-control" name="KITAPTUR" required="" />
+    </div>
+
+    <div>
+        <label>ALIŞ FİYATI GRV</label>
+        <input type="text" class="form-control" name="ALISFİYATGRV" required="" />
+    </div>
+
+    <div>
+        <label>KUR GRV</label>
+        <input type="text" class="form-control" name="KURGRV" required="" />
+    </div>
+
+    <div>
+        <label>SATIŞ FİYATI TL</label>
+        <input type="text" class="form-control" name="SATISFİYATTL" required="" />
+    </div>
+
+    <div>
+        <label>DURUMU</label>
+        <input type="text" class="form-control" name="DURUMU" required="" />
+    </div>
+
+    <div>
+        <label>STOK</label>
+        <input type="text" class="form-control" name="STOK" required="" />
+    </div>
+
+    <div>
+        <label>ALIŞ TARİHİ</label>
+        <input type="text" class="form-control" name="ALISTARIH" required="" />
+    </div>
+
+   
+
+    <div>
+        <label>KALAN CİRO</label>
+        <input type="text" class="form-control" name="KALANKARTL" required="" />
+    </div>
+
+    <div style="margin-top:15px">
+        <button class="btn btn-info">YENİ ÜRÜN EKLE</button>
+    </div>
+</form>
+
+

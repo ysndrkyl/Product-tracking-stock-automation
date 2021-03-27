@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FinishProjectVtbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullanıcıAD" Type="nchar" MaxLength="30" />
+          <Property Name="Sifre" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TBLKATEGORILER">
+          <Key>
+            <PropertyRef Name="KATEGORIID" />
+          </Key>
+          <Property Name="KATEGORIID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KATEGORIAD" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBLMUSTERILER">
+          <Key>
+            <PropertyRef Name="MUSTERIID" />
+          </Key>
+          <Property Name="MUSTERIID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MUSTERIAD" Type="varchar" MaxLength="50" />
+          <Property Name="MUSTERISOYAD" Type="varchar" MaxLength="50" />
+          <Property Name="MUSTERITEL" Type="nchar" MaxLength="20" />
+          <Property Name="MUSTERIINSTAGRAM" Type="varchar" MaxLength="50" />
+          <Property Name="MUSTERIADRES" Type="varchar" MaxLength="50" />
+          <Property Name="MUSTERIEMAIL" Type="nchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="TBLSATISLAR">
+          <Key>
+            <PropertyRef Name="SATISID" />
+          </Key>
+          <Property Name="SATISID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URUN" Type="int" />
+          <Property Name="MUSTERI" Type="int" />
+          <Property Name="ADET" Type="tinyint" />
+          <Property Name="FIYAT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TARIH" Type="date" />
+          <Property Name="TOPLAMTUTAR" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="TBLURUNLER">
+          <Key>
+            <PropertyRef Name="KITAPID" />
+          </Key>
+          <Property Name="KITAPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KITAPAD" Type="varchar" MaxLength="50" />
+          <Property Name="KITAPKATEGORI" Type="smallint" />
+          <Property Name="YAZAR" Type="varchar" MaxLength="50" />
+          <Property Name="KITAPTUR" Type="varchar" MaxLength="50" />
+          <Property Name="ALISFİYATGRV" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="KURGRV" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SATISFİYATTL" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DURUMU" Type="nvarchar" MaxLength="50" />
+          <Property Name="STOK" Type="varchar" MaxLength="50" />
+          <Property Name="ALISTARIH" Type="date" />
+          <Property Name="SATISTARIH" Type="date" />
+          <Property Name="KALANKARTL" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_TBLSATISLAR_TBLMUSTERILER">
+          <End Role="TBLMUSTERILER" Type="Self.TBLMUSTERILER" Multiplicity="0..1" />
+          <End Role="TBLSATISLAR" Type="Self.TBLSATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLMUSTERILER">
+              <PropertyRef Name="MUSTERIID" />
+            </Principal>
+            <Dependent Role="TBLSATISLAR">
+              <PropertyRef Name="MUSTERI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATISLAR_TBLMUSTERILER1">
+          <End Role="TBLMUSTERILER" Type="Self.TBLMUSTERILER" Multiplicity="0..1" />
+          <End Role="TBLSATISLAR" Type="Self.TBLSATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLMUSTERILER">
+              <PropertyRef Name="MUSTERIID" />
+            </Principal>
+            <Dependent Role="TBLSATISLAR">
+              <PropertyRef Name="MUSTERI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATISLAR_TBLURUNLER1">
+          <End Role="TBLURUNLER" Type="Self.TBLURUNLER" Multiplicity="0..1" />
+          <End Role="TBLSATISLAR" Type="Self.TBLSATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLURUNLER">
+              <PropertyRef Name="KITAPID" />
+            </Principal>
+            <Dependent Role="TBLSATISLAR">
+              <PropertyRef Name="URUN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLURUNLER_TBLKATEGORILER1">
+          <End Role="TBLKATEGORILER" Type="Self.TBLKATEGORILER" Multiplicity="0..1" />
+          <End Role="TBLURUNLER" Type="Self.TBLURUNLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKATEGORILER">
+              <PropertyRef Name="KATEGORIID" />
+            </Principal>
+            <Dependent Role="TBLURUNLER">
+              <PropertyRef Name="KITAPKATEGORI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinishProjectVtbModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLKATEGORILER" EntityType="Self.TBLKATEGORILER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLMUSTERILER" EntityType="Self.TBLMUSTERILER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLSATISLAR" EntityType="Self.TBLSATISLAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLURUNLER" EntityType="Self.TBLURUNLER" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBLSATISLAR_TBLMUSTERILER" Association="Self.FK_TBLSATISLAR_TBLMUSTERILER">
+            <End Role="TBLMUSTERILER" EntitySet="TBLMUSTERILER" />
+            <End Role="TBLSATISLAR" EntitySet="TBLSATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATISLAR_TBLMUSTERILER1" Association="Self.FK_TBLSATISLAR_TBLMUSTERILER1">
+            <End Role="TBLMUSTERILER" EntitySet="TBLMUSTERILER" />
+            <End Role="TBLSATISLAR" EntitySet="TBLSATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATISLAR_TBLURUNLER1" Association="Self.FK_TBLSATISLAR_TBLURUNLER1">
+            <End Role="TBLURUNLER" EntitySet="TBLURUNLER" />
+            <End Role="TBLSATISLAR" EntitySet="TBLSATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLURUNLER_TBLKATEGORILER1" Association="Self.FK_TBLURUNLER_TBLKATEGORILER1">
+            <End Role="TBLKATEGORILER" EntitySet="TBLKATEGORILER" />
+            <End Role="TBLURUNLER" EntitySet="TBLURUNLER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FinishProjectVtbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullanıcıAD" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TBLKATEGORILER">
+          <Key>
+            <PropertyRef Name="KATEGORIID" />
+          </Key>
+          <Property Name="KATEGORIID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KATEGORIAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TBLURUNLER" Relationship="Self.FK_TBLURUNLER_TBLKATEGORILER1" FromRole="TBLKATEGORILER" ToRole="TBLURUNLER" />
+        </EntityType>
+        <EntityType Name="TBLMUSTERILER">
+          <Key>
+            <PropertyRef Name="MUSTERIID" />
+          </Key>
+          <Property Name="MUSTERIID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MUSTERIAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MUSTERISOYAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MUSTERITEL" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="MUSTERIINSTAGRAM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MUSTERIADRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MUSTERIEMAIL" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="TBLSATISLAR" Relationship="Self.FK_TBLSATISLAR_TBLMUSTERILER" FromRole="TBLMUSTERILER" ToRole="TBLSATISLAR" />
+          <NavigationProperty Name="TBLSATISLAR1" Relationship="Self.FK_TBLSATISLAR_TBLMUSTERILER1" FromRole="TBLMUSTERILER" ToRole="TBLSATISLAR" />
+        </EntityType>
+        <EntityType Name="TBLSATISLAR">
+          <Key>
+            <PropertyRef Name="SATISID" />
+          </Key>
+          <Property Name="SATISID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URUN" Type="Int32" />
+          <Property Name="MUSTERI" Type="Int32" />
+          <Property Name="ADET" Type="Byte" />
+          <Property Name="FIYAT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TARIH" Type="DateTime" Precision="0" />
+          <Property Name="TOPLAMTUTAR" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="TBLMUSTERILER" Relationship="Self.FK_TBLSATISLAR_TBLMUSTERILER" FromRole="TBLSATISLAR" ToRole="TBLMUSTERILER" />
+          <NavigationProperty Name="TBLMUSTERILER1" Relationship="Self.FK_TBLSATISLAR_TBLMUSTERILER1" FromRole="TBLSATISLAR" ToRole="TBLMUSTERILER" />
+          <NavigationProperty Name="TBLURUNLER" Relationship="Self.FK_TBLSATISLAR_TBLURUNLER1" FromRole="TBLSATISLAR" ToRole="TBLURUNLER" />
+        </EntityType>
+        <EntityType Name="TBLURUNLER">
+          <Key>
+            <PropertyRef Name="KITAPID" />
+          </Key>
+          <Property Name="KITAPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KITAPAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KITAPKATEGORI" Type="Int16" />
+          <Property Name="YAZAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KITAPTUR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ALISFİYATGRV" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="KURGRV" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SATISFİYATTL" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DURUMU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STOK" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ALISTARIH" Type="DateTime" Precision="0" />
+          <Property Name="SATISTARIH" Type="DateTime" Precision="0" />
+          <Property Name="KALANKARTL" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="TBLKATEGORILER" Relationship="Self.FK_TBLURUNLER_TBLKATEGORILER1" FromRole="TBLURUNLER" ToRole="TBLKATEGORILER" />
+          <NavigationProperty Name="TBLSATISLAR" Relationship="Self.FK_TBLSATISLAR_TBLURUNLER1" FromRole="TBLURUNLER" ToRole="TBLSATISLAR" />
+        </EntityType>
+        <Association Name="FK_TBLURUNLER_TBLKATEGORILER1">
+          <End Role="TBLKATEGORILER" Type="Self.TBLKATEGORILER" Multiplicity="0..1" />
+          <End Role="TBLURUNLER" Type="Self.TBLURUNLER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLKATEGORILER">
+              <PropertyRef Name="KATEGORIID" />
+            </Principal>
+            <Dependent Role="TBLURUNLER">
+              <PropertyRef Name="KITAPKATEGORI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATISLAR_TBLMUSTERILER">
+          <End Role="TBLMUSTERILER" Type="Self.TBLMUSTERILER" Multiplicity="0..1" />
+          <End Role="TBLSATISLAR" Type="Self.TBLSATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLMUSTERILER">
+              <PropertyRef Name="MUSTERIID" />
+            </Principal>
+            <Dependent Role="TBLSATISLAR">
+              <PropertyRef Name="MUSTERI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATISLAR_TBLMUSTERILER1">
+          <End Role="TBLMUSTERILER" Type="Self.TBLMUSTERILER" Multiplicity="0..1" />
+          <End Role="TBLSATISLAR" Type="Self.TBLSATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLMUSTERILER">
+              <PropertyRef Name="MUSTERIID" />
+            </Principal>
+            <Dependent Role="TBLSATISLAR">
+              <PropertyRef Name="MUSTERI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBLSATISLAR_TBLURUNLER1">
+          <End Role="TBLURUNLER" Type="Self.TBLURUNLER" Multiplicity="0..1" />
+          <End Role="TBLSATISLAR" Type="Self.TBLSATISLAR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLURUNLER">
+              <PropertyRef Name="KITAPID" />
+            </Principal>
+            <Dependent Role="TBLSATISLAR">
+              <PropertyRef Name="URUN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinishProjectVtbEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="Self.Admin" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TBLKATEGORILER" EntityType="Self.TBLKATEGORILER" />
+          <EntitySet Name="TBLMUSTERILER" EntityType="Self.TBLMUSTERILER" />
+          <EntitySet Name="TBLSATISLAR" EntityType="Self.TBLSATISLAR" />
+          <EntitySet Name="TBLURUNLER" EntityType="Self.TBLURUNLER" />
+          <AssociationSet Name="FK_TBLURUNLER_TBLKATEGORILER1" Association="Self.FK_TBLURUNLER_TBLKATEGORILER1">
+            <End Role="TBLKATEGORILER" EntitySet="TBLKATEGORILER" />
+            <End Role="TBLURUNLER" EntitySet="TBLURUNLER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATISLAR_TBLMUSTERILER" Association="Self.FK_TBLSATISLAR_TBLMUSTERILER">
+            <End Role="TBLMUSTERILER" EntitySet="TBLMUSTERILER" />
+            <End Role="TBLSATISLAR" EntitySet="TBLSATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATISLAR_TBLMUSTERILER1" Association="Self.FK_TBLSATISLAR_TBLMUSTERILER1">
+            <End Role="TBLMUSTERILER" EntitySet="TBLMUSTERILER" />
+            <End Role="TBLSATISLAR" EntitySet="TBLSATISLAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBLSATISLAR_TBLURUNLER1" Association="Self.FK_TBLSATISLAR_TBLURUNLER1">
+            <End Role="TBLURUNLER" EntitySet="TBLURUNLER" />
+            <End Role="TBLSATISLAR" EntitySet="TBLSATISLAR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinishProjectVtbModelStoreContainer" CdmEntityContainer="FinishProjectVtbEntities6">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="FinishProjectVtbModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="KullanıcıAD" ColumnName="KullanıcıAD" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FinishProjectVtbModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLKATEGORILER">
+            <EntityTypeMapping TypeName="FinishProjectVtbModel.TBLKATEGORILER">
+              <MappingFragment StoreEntitySet="TBLKATEGORILER">
+                <ScalarProperty Name="KATEGORIID" ColumnName="KATEGORIID" />
+                <ScalarProperty Name="KATEGORIAD" ColumnName="KATEGORIAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLMUSTERILER">
+            <EntityTypeMapping TypeName="FinishProjectVtbModel.TBLMUSTERILER">
+              <MappingFragment StoreEntitySet="TBLMUSTERILER">
+                <ScalarProperty Name="MUSTERIID" ColumnName="MUSTERIID" />
+                <ScalarProperty Name="MUSTERIAD" ColumnName="MUSTERIAD" />
+                <ScalarProperty Name="MUSTERISOYAD" ColumnName="MUSTERISOYAD" />
+                <ScalarProperty Name="MUSTERITEL" ColumnName="MUSTERITEL" />
+                <ScalarProperty Name="MUSTERIINSTAGRAM" ColumnName="MUSTERIINSTAGRAM" />
+                <ScalarProperty Name="MUSTERIADRES" ColumnName="MUSTERIADRES" />
+                <ScalarProperty Name="MUSTERIEMAIL" ColumnName="MUSTERIEMAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLSATISLAR">
+            <EntityTypeMapping TypeName="FinishProjectVtbModel.TBLSATISLAR">
+              <MappingFragment StoreEntitySet="TBLSATISLAR">
+                <ScalarProperty Name="SATISID" ColumnName="SATISID" />
+                <ScalarProperty Name="URUN" ColumnName="URUN" />
+                <ScalarProperty Name="MUSTERI" ColumnName="MUSTERI" />
+                <ScalarProperty Name="ADET" ColumnName="ADET" />
+                <ScalarProperty Name="FIYAT" ColumnName="FIYAT" />
+                <ScalarProperty Name="TARIH" ColumnName="TARIH" />
+                <ScalarProperty Name="TOPLAMTUTAR" ColumnName="TOPLAMTUTAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLURUNLER">
+            <EntityTypeMapping TypeName="FinishProjectVtbModel.TBLURUNLER">
+              <MappingFragment StoreEntitySet="TBLURUNLER">
+                <ScalarProperty Name="KITAPID" ColumnName="KITAPID" />
+                <ScalarProperty Name="KITAPAD" ColumnName="KITAPAD" />
+                <ScalarProperty Name="KITAPKATEGORI" ColumnName="KITAPKATEGORI" />
+                <ScalarProperty Name="YAZAR" ColumnName="YAZAR" />
+                <ScalarProperty Name="KITAPTUR" ColumnName="KITAPTUR" />
+                <ScalarProperty Name="ALISFİYATGRV" ColumnName="ALISFİYATGRV" />
+                <ScalarProperty Name="KURGRV" ColumnName="KURGRV" />
+                <ScalarProperty Name="SATISFİYATTL" ColumnName="SATISFİYATTL" />
+                <ScalarProperty Name="DURUMU" ColumnName="DURUMU" />
+                <ScalarProperty Name="STOK" ColumnName="STOK" />
+                <ScalarProperty Name="ALISTARIH" ColumnName="ALISTARIH" />
+                <ScalarProperty Name="SATISTARIH" ColumnName="SATISTARIH" />
+                <ScalarProperty Name="KALANKARTL" ColumnName="KALANKARTL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

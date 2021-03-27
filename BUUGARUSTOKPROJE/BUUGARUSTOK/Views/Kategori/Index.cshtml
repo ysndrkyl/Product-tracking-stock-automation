@@ -1,0 +1,41 @@
+﻿@using BUUGARUSTOK.Models.Entity;
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBLKATEGORILER>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<table id="tbl4" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>KATEGORİ ADI</th>
+            <th>GÜNCELLE</th>
+            <th>SİL</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ktgr in Model)
+        {
+            <tr>
+                <td>@ktgr.KATEGORIAD</td>
+                <td><a href="/KATEGORI/KategoriGuncelle/@ktgr.KATEGORIID" class="btn btn-success">GÜNCELLE</a></td>
+                <td>@Html.ActionLink("SİL", "SIL", new { id = ktgr.KATEGORIID }, new { @class = "btn btn-danger", onclick = "return confirm('Gerçekten silmek istiyormusunuz?')" })</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/KATEGORI/YeniKategori/" class="btn btn-primary">YENİ KATAGORİ EKLE</a>
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<script>
+    $('#tbl4').DataTable();
+</script>
